@@ -23,7 +23,7 @@
   "noExchange": "No Exchange Found",
   "noToken": "No Token Found",
   "exchangeRate": "Exchange Rate",
-  "unknownError": "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device.",
+  "unknownError": "Oops! An unknown error occurred. Please make sure you have metamask installed on your browser and refresh the page, or visit from another browser or device.",
   "enterValueCont": "Enter a {{ missingCurrencyValue }} value to continue.",
   "selectTokenCont": "Select a token to continue.",
   "noLiquidity": "No liquidity.",

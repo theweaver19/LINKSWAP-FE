@@ -1,6 +1,7 @@
 import { ConnectorUpdate } from '@web3-react/types'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import invariant from 'tiny-invariant'
+import Web3 from 'web3'
 
 interface NetworkConnectorArguments {
   urls: { [chainId: number]: string }
@@ -146,21 +147,21 @@ export class NetworkConnector extends AbstractConnector {
 
     this.currentChainId = defaultChainId || Number(Object.keys(urls)[0])
     this.providers = Object.keys(urls).reduce<{ [chainId: number]: MiniRpcProvider }>((accumulator, chainId) => {
-      accumulator[Number(chainId)] = new MiniRpcProvider(Number(chainId), urls[Number(chainId)])
+      accumulator[Number(1)] = new MiniRpcProvider(Number(chainId), "http://localhost")
       return accumulator
     }, {})
   }
 
   public get provider(): MiniRpcProvider {
-    return this.providers[this.currentChainId]
+    return Web3.givenProvider || {}
   }
 
   public async activate(): Promise<ConnectorUpdate> {
-    return { provider: this.providers[this.currentChainId], chainId: this.currentChainId, account: null }
+    return { provider: Web3.givenProvider || {}, chainId: this.currentChainId, account: null }
   }
 
   public async getProvider(): Promise<MiniRpcProvider> {
-    return this.providers[this.currentChainId]
+    return Web3.givenProvider || {}
   }
 
   public async getChainId(): Promise<number> {

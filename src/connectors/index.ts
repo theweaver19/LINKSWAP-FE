@@ -3,11 +3,12 @@ import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import { PortisConnector } from '@web3-react/portis-connector'
+import Web3 from 'web3'
 
 import { FortmaticConnector } from './Fortmatic'
 import { NetworkConnector } from './NetworkConnector'
 
-const NETWORK_URL = process.env.REACT_APP_NETWORK_URL
+const NETWORK_URL = process.env.REACT_APP_NETWORK_URL + ""
 const FORMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY
 const PORTIS_ID = process.env.REACT_APP_PORTIS_ID
 
@@ -20,9 +21,9 @@ export const WYRE_SK: string = process.env.REACT_APP_WYRE_API_SK || ''
 
 export const ETH_API_KEY: string = process.env.REACT_APP_ETHERSCAN_API_KEY || 'NOETHERSCANAPIKEY'
 
-if (typeof NETWORK_URL === 'undefined') {
-  throw new Error(`REACT_APP_NETWORK_URL must be a defined environment variable`)
-}
+// if (typeof NETWORK_URL === 'undefined') {
+//   throw new Error(`REACT_APP_NETWORK_URL must be a defined environment variable`)
+// }
 
 export const network = new NetworkConnector({
   urls: { [NETWORK_CHAIN_ID]: NETWORK_URL }
@@ -30,7 +31,7 @@ export const network = new NetworkConnector({
 
 let networkLibrary: Web3Provider | undefined
 export function getNetworkLibrary(): Web3Provider {
-  return (networkLibrary = networkLibrary ?? new Web3Provider(network.provider as any))
+  return  Web3.givenProvider
 }
 
 export const injected = new InjectedConnector({
